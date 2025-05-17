@@ -9,13 +9,13 @@ const guideLineBaseWidth = 375;
 const guideLineBaseHeight = 812;
 
 //scale horizontally
-export const scale =(size: number) => {
-    Math.round(PixelRatio.roundToNearestPixel((shortDimension / guideLineBaseWidth) * (size as number)));
+export const scale = (size: number): number => {
+    return Math.round(PixelRatio.roundToNearestPixel((shortDimension / guideLineBaseWidth) * (size as number)));
 }
 
 //scale vertically
-export const verticalScale =(size: number) => {
-    Math.round(PixelRatio.roundToNearestPixel((longDimension / guideLineBaseHeight) * (size as number)));
+export const verticalScale = (size: number): number => {
+    return Math.round(PixelRatio.roundToNearestPixel((longDimension / guideLineBaseHeight) * (size as number)));
 }
 
 
