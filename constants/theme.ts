@@ -10,6 +10,8 @@ export const colors = {
     danger: '#EF4444',
     success: '#10B981',
     warning: '#F59E0B',
+    //i need the black to be lighter
+    black: '#111827',
 }
 
 export const spacingX = {
