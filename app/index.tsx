@@ -1,11 +1,28 @@
 import {StyleSheet, Text, View} from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { colors } from "@/constants/theme";
+import { Image } from "react-native";
+import { useRouter } from "expo-router";
+
+
+// this is basically the splash screen
 
 const index = () => {
+
+    const router = useRouter();
+
+    useEffect(() => {
+        setTimeout(() => {
+            router.push("/(auth)/welcome");
+        }, 2000);
+    }, []);
+
     return (
         <View style={styles.container}>
-            <Text>index</Text>
+            <Image source={require("../assets/images/logo.png")}
+                style={styles.logo}
+                resizeMode="contain"
+            />
         </View>
     );
 };
@@ -18,5 +35,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: colors.black
+    },
+    logo: {
+        height: "25%",
+        aspectRatio: 1
     }
 });
