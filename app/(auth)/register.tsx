@@ -8,17 +8,19 @@ import Button from '@/components/Button'
 import { verticalScale } from '@/utils/styling'
 import { useRouter } from 'expo-router'
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const router = useRouter();
   const handleSubmit = async() => {
-    if (!email || !password) {
+    if (!email || !password || !name) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
     console.log('Email: ', email);
     console.log('Password: ', password);
+    console.log('Name: ', name);
     setIsLoading(true);
     try {
       
@@ -33,11 +35,17 @@ const Login = () => {
       <View style={styles.container}>
         <BackButton/>
         <View style={styles.header}>
-          <Text style={styles.headerText}>Hey there,</Text>
-          <Text style={styles.headerText}>Welcome back!</Text>
+          <Text style={styles.headerText}>Howdy!</Text>
+          <Text style={styles.headerText}>Join our community</Text>
         </View>
         <View style={styles.form}>
-          <Text style={styles.formText}>Login to your account</Text>
+          <Text style={styles.formText}>Create an account</Text>
+          <TextInput
+            placeholderTextColor="gray"
+            onChangeText={(text) => setName(text)}
+            placeholder="Name"
+            style={styles.input}
+          />
           <TextInput
             // i need the placeholder to be gray
             placeholderTextColor="gray"
@@ -58,13 +66,13 @@ const Login = () => {
           onPress={handleSubmit}
           loading={isLoading}
         >
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Register</Text>
         </Button>
         {/*footer*/}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Don't have an account?</Text>
-          <TouchableOpacity onPress={() => router.navigate('/(auth)/register')}>
-            <Text style={styles.footerTextTwo}>Register</Text>
+          <Text style={styles.footerText}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => router.navigate('/(auth)/login')}>
+            <Text style={styles.footerTextTwo}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -72,7 +80,7 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register
 
 const styles = StyleSheet.create({
   header: {
