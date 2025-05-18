@@ -26,25 +26,29 @@ const Login = () => {
     <ScreenWrapper>
       <View style={styles.container}>
         <BackButton/>
-        <View>
-          <Text>Hey there,</Text>
-          <Text>Welcome back!</Text>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Hey there,</Text>
+          <Text style={styles.headerText}>Welcome back!</Text>
         </View>
-        <View>
-          <Text>Login to your account</Text>
+        <View style={styles.form}>
+          <Text style={styles.formText}>Login to your account</Text>
           <TextInput
+            // i need the placeholder to be gray
+            placeholderTextColor="gray"
             onChangeText={(text) => setEmail(text)}
             placeholder="Email"
             style={styles.input}
           />
           <TextInput
+            placeholderTextColor="gray"
             onChangeText={(text) => setPassword(text)}
             placeholder="Password"
             style={styles.input}
             secureTextEntry
           />
         </View>
-        <Button
+        <Button 
+          style={styles.button}
           onPress={handleSubmit}
           loading={isLoading}
         >
@@ -52,9 +56,9 @@ const Login = () => {
         </Button>
         {/*footer*/}
         <View style={styles.footer}>
-          <Text>Don't have an account?</Text>
+          <Text style={styles.footerText}>Don't have an account?</Text>
           <TouchableOpacity onPress={() => router.push('/(auth)/register')}>
-            <Text>Register</Text>
+            <Text style={styles.footerTextTwo}>Register</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -65,10 +69,28 @@ const Login = () => {
 export default Login
 
 const styles = StyleSheet.create({
+  header: {
+    marginBottom: verticalScale(20),
+    gap: verticalScale(4),
+    marginTop: verticalScale(20),
+  },
+  headerText: {
+    fontSize: verticalScale(20),
+    fontWeight: 'bold',
+    color: 'white',
+  },
   container: {
     flex: 1,
     paddingTop: spacingY.md,
-    paddingHorizontal: spacingX.lg,
+    paddingHorizontal: spacingX.lg
+  },
+  form: {
+    gap: verticalScale(16),
+  },
+  formText: {
+    fontSize: verticalScale(12),
+    fontWeight: 'normal',
+    color: 'white',
   },
   input: {
     borderWidth: 1,
@@ -77,6 +99,10 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 12,
     width: '100%',
+    color: 'white',
+  },
+  button: {
+    marginTop: verticalScale(20),
   },
   buttonText: {
     fontSize: verticalScale(16),
@@ -89,5 +115,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  footerText: {
+    fontSize: verticalScale(12),
+    fontWeight: 'normal',
+    color: 'white',
+  },
+  footerTextTwo: {
+    marginLeft: verticalScale(4),
+    fontSize: verticalScale(12),
+    fontWeight: 'bold',
+    color: 'rgba(230, 193, 81, 0.83)',
   },
 })
