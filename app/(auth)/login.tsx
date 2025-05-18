@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import { spacingY, spacingX } from '@/constants/theme'
 import BackButton from '@/components/BackButton'
@@ -7,13 +7,17 @@ import { TextInput } from 'react-native'
 import { useRef } from 'react'
 import Button from '@/components/Button'
 import { verticalScale } from '@/utils/styling'
+import { useRouter } from 'expo-router'
 
 const Login = () => {
   const emailRef = useRef<string>("");
   const passwordRef = useRef<string>("");
+  const router = useRouter();
   const handleSubmit = async() => {
+    console.log(emailRef.current);
+    console.log(passwordRef.current);
   }
-
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <ScreenWrapper>
       <View style={styles.container}>
@@ -40,9 +44,17 @@ const Login = () => {
         </View>
         <Button
           onPress={handleSubmit}
+          loading={isLoading}
         >
           <Text style={styles.buttonText}>Login</Text>
         </Button>
+        {/*footer*/}
+        <View style={styles.footer}>
+          <Text>Don't have an account?</Text>
+          <TouchableOpacity onPress={() => router.push('/(auth)/register')}>
+            <Text>Register</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScreenWrapper>
   )
@@ -70,5 +82,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
     textAlign: 'center',
-  }
+  },
+  footer: {
+    marginTop: verticalScale(20),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
