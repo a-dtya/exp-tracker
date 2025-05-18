@@ -6,13 +6,19 @@ import { spacingY, radius, spacingX } from '@/constants/theme'
 import { colors } from '@/constants/theme'
 import Button from '@/components/Button'
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated'
+import { useRouter } from 'expo-router'
 
 const welcome = () => {
+
+  const router = useRouter();
+
+
+
   return (
     <ScreenWrapper>
       <View style={styles.container}>
         <View>
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity style={styles.loginButton} onPress={() => router.push('/(auth)/login')}>
             <Text style={styles.subtitle}>Sign In</Text>
           </TouchableOpacity>
           <Animated.Image entering={FadeIn.duration(1000)} source={require('@/assets/images/Savings-bro.png')} style={styles.welcomeImage} resizeMode="contain"/>
@@ -23,7 +29,7 @@ const welcome = () => {
             <Animated.Text entering={FadeInDown.duration(1000)} style={{fontSize: verticalScale(12), color: 'white', marginTop: verticalScale(14)}} >Manage your budget with ease</Animated.Text>
           </View>
           <Animated.View entering={FadeInDown.duration(1000).delay(1000)} style={[styles.buttonContainer, {marginTop: verticalScale(20)}]}>
-            <Button>
+            <Button onPress={() => router.push('/(auth)/register')}>
               <Text style={[styles.buttonText, {color: 'black'}]}>Get Started ➜</Text>
             </Button>
           </Animated.View>
