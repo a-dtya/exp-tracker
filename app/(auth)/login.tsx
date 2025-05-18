@@ -4,18 +4,22 @@ import ScreenWrapper from '@/components/ScreenWrapper'
 import { spacingY, spacingX } from '@/constants/theme'
 import BackButton from '@/components/BackButton'
 import { TextInput } from 'react-native'
-import { useRef } from 'react'
 import Button from '@/components/Button'
 import { verticalScale } from '@/utils/styling'
 import { useRouter } from 'expo-router'
 
 const Login = () => {
-  const emailRef = useRef<string>("");
-  const passwordRef = useRef<string>("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
   const handleSubmit = async() => {
-    console.log(emailRef.current);
-    console.log(passwordRef.current);
+    setIsLoading(true);
+    try {
+      
+    } catch (error) {
+      
+    }
+    setIsLoading(false);
   }
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -29,17 +33,15 @@ const Login = () => {
         <View>
           <Text>Login to your account</Text>
           <TextInput
-            onChangeText={(text) => emailRef.current = text}
+            onChangeText={(text) => setEmail(text)}
             placeholder="Email"
             style={styles.input}
-            value={emailRef.current}
           />
           <TextInput
-            onChangeText={(text) => passwordRef.current = text}
+            onChangeText={(text) => setPassword(text)}
             placeholder="Password"
             style={styles.input}
             secureTextEntry
-            value={passwordRef.current}
           />
         </View>
         <Button
@@ -66,8 +68,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: spacingY.md,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingHorizontal: spacingX.lg,
   },
   input: {
     borderWidth: 1,
