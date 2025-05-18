@@ -5,6 +5,7 @@ import { verticalScale} from '@/utils/styling'
 import { spacingY, radius, spacingX } from '@/constants/theme'
 import { colors } from '@/constants/theme'
 import Button from '@/components/Button'
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated'
 
 const welcome = () => {
   return (
@@ -14,18 +15,18 @@ const welcome = () => {
           <TouchableOpacity style={styles.loginButton}>
             <Text style={styles.subtitle}>Sign In</Text>
           </TouchableOpacity>
-          <Image source={require('@/assets/images/Savings-bro.png')} style={styles.welcomeImage} resizeMode="contain"/>
+          <Animated.Image entering={FadeIn.duration(1000)} source={require('@/assets/images/Savings-bro.png')} style={styles.welcomeImage} resizeMode="contain"/>
         </View>
         <View style={styles.footer}>
           <View style={{alignItems: 'center'}}>
-            <Text style={styles.title}>Dive into your expenses</Text>
-            <Text style={{fontSize: verticalScale(12), color: 'white', marginTop: verticalScale(14)}} >Manage your budget with ease</Text>
+            <Animated.Text entering={FadeInDown.duration(1000)} style={styles.title}>Dive into your expenses</Animated.Text>
+            <Animated.Text entering={FadeInDown.duration(1000)} style={{fontSize: verticalScale(12), color: 'white', marginTop: verticalScale(14)}} >Manage your budget with ease</Animated.Text>
           </View>
-          <View style={[styles.buttonContainer, {marginTop: verticalScale(20)}]}>
+          <Animated.View entering={FadeInDown.duration(1000).delay(1000)} style={[styles.buttonContainer, {marginTop: verticalScale(20)}]}>
             <Button>
               <Text style={[styles.buttonText, {color: 'black'}]}>Get Started ➜</Text>
             </Button>
-          </View>
+          </Animated.View>
         </View>
       </View>
     </ScreenWrapper>
