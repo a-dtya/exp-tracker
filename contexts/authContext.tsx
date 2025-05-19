@@ -23,7 +23,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
                     name: user.displayName || null,
                 })
                 console.log(user);
-                
+                //store user state, as sometimes auth data might not have everything from firestore, for eg: name
+                getUserState(user.uid);
                 router.replace("/(tabs)")
             } else {
                 setUser(null);

@@ -7,11 +7,13 @@ import { TextInput } from 'react-native'
 import Button from '@/components/Button'
 import { verticalScale } from '@/utils/styling'
 import { useRouter } from 'expo-router'
+import { useAuth } from '@/contexts/authContext'
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const {login: loginUser} = useAuth();
   const handleSubmit = async() => {
     if (!email || !password) {
       Alert.alert('Error', 'Please fill in all fields');
@@ -21,9 +23,12 @@ const Login = () => {
     console.log('Password: ', password);
     setIsLoading(true);
     try {
-      
+      const response = await loginUser(email, password);
+      if(response.success) {
+        router.replace('/(tabs)');
+      }
     } catch (error) {
-      
+      Alert.alert('Error', 'Invalid email or password');
     }
     setIsLoading(false);
   }
