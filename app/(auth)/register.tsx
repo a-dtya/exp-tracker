@@ -7,12 +7,16 @@ import { TextInput } from 'react-native'
 import Button from '@/components/Button'
 import { verticalScale } from '@/utils/styling'
 import { useRouter } from 'expo-router'
+import { useAuth } from '@/contexts/authContext'
+
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const router = useRouter();
+
+  const {register: registerUser} = useAuth();
   const handleSubmit = async() => {
     if (!email || !password || !name) {
       Alert.alert('Error', 'Please fill in all fields');
@@ -23,9 +27,13 @@ const Register = () => {
     console.log('Name: ', name);
     setIsLoading(true);
     try {
-      
+      const response = await registerUser(email, password, name);
+      if (response.success) {
+        Alert.alert('Success', 'User registered successfully');
+        router.navigate('/(auth)/login');
+      }
     } catch (error) {
-      
+      Alert.alert('Error', 'Something went wrong');
     }
     setIsLoading(false);
   }

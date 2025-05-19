@@ -21,7 +21,7 @@ export const AuthContextProvider: React.FC<{children: React.ReactNode}> = ({chil
         }
     }
 
-    const register = async(email: string, password: string) => {
+    const register = async(email: string, password: string, name: string) => {
         try {
             const response = await createUserWithEmailAndPassword(auth, email, password);
             await setDoc(doc(firestore, "users", response?.user?.uid), {
