@@ -9,7 +9,7 @@ import { firestore } from "../config/firebase";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthContextProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
+export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
     const [user, setUser] = useState<UserType | null>(null);
 
     const login = async(email: string, password: string) => {

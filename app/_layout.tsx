@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { Stack } from 'expo-router'
 import React from 'react'
-import { AuthContextProvider } from '@/contexts/authContext'
+import { AuthProvider } from '@/contexts/authContext'
 
 
 const StackLayout = () => {
@@ -14,9 +14,9 @@ const StackLayout = () => {
 
 export default function RootLayout() {
   return (
-    <AuthContextProvider>
+    <AuthProvider>
       <StackLayout/>
-    </AuthContextProvider>
+    </AuthProvider>
   )
 }
 
