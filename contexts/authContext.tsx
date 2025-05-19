@@ -1,16 +1,39 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { AuthContextType, UserType } from "../types";
 import { useState } from "react";
 import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { firestore } from "../config/firebase";
+import { useRouter } from "expo-router";
 
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
     const [user, setUser] = useState<UserType | null>(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if(user) {
+                setUser({
+                    uid: user?.uid,
+                    email: user.email || null,
+                    name: user.displayName || null,
+                })
+                console.log(user);
+                
+                router.replace("/(tabs)")
+            } else {
+                setUser(null);
+                router.replace("/(auth)/welcome")
+                console.log("User is not logged in");
+                
+            }
+        })
+        return () => unsubscribe();
+    }, [])
 
     const login = async(email: string, password: string) => {
         try {

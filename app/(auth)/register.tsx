@@ -29,10 +29,12 @@ const Register = () => {
     try {
       const response = await registerUser(email, password, name);
       if (response.success) {
+        setIsLoading(false);
         Alert.alert('Success', 'User registered successfully');
         router.navigate('/(auth)/login');
       }
     } catch (error) {
+      setIsLoading(false);
       Alert.alert('Error', 'Something went wrong');
     }
     setIsLoading(false);
