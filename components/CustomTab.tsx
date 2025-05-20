@@ -1,14 +1,46 @@
-import { View, Platform } from 'react-native';
+import { View, Platform, TouchableOpacity } from 'react-native';
 import { useLinkBuilder, useTheme } from '@react-navigation/native';
 import { Text, PlatformPressable } from '@react-navigation/elements';
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {colors, spacingY} from "@/constants/theme"
 import { StyleSheet } from 'react-native';
 import { verticalScale } from '@/utils/styling';
+import * as Icons from "phosphor-react-native"
 
 export default function CustomTab({ state, descriptors, navigation }: BottomTabBarProps) {
 //   const { colors } = useTheme();
 //   const { buildHref } = useLinkBuilder();
+
+  const tabIcons: any = {
+    index: (isFocused: boolean) =>(
+        <Icons.House
+        color={isFocused ? "white" : colors.black}
+        size={verticalScale(24)}
+        weight={isFocused ? "fill": "regular"}
+        />
+    ),
+    profile: (isFocused: boolean) =>(
+        <Icons.User
+        color={isFocused ? "white" : colors.black}
+        size={verticalScale(24)}
+        weight={isFocused ? "fill": "regular"}
+        />
+    ),
+    statistics: (isFocused: boolean) =>(
+        <Icons.ChartBar
+        color={isFocused ? "white" : colors.black}
+        size={verticalScale(24)}
+        weight={isFocused ? "fill": "regular"}
+        />
+    ),
+    wallet: (isFocused: boolean) =>(
+        <Icons.Wallet
+        color={isFocused ? "white" : colors.black}
+        size={verticalScale(24)}
+        weight={isFocused ? "fill": "regular"}
+        />
+    ),
+  }
 
   return (
     <View style={styles.container}>
@@ -43,7 +75,7 @@ export default function CustomTab({ state, descriptors, navigation }: BottomTabB
         };
 
         return (
-          <PlatformPressable
+          <TouchableOpacity
             // href={buildHref(route.name, route.params)}
             key={route.name}
             accessibilityState={isFocused ? { selected: true } : {}}
@@ -53,10 +85,10 @@ export default function CustomTab({ state, descriptors, navigation }: BottomTabB
             onLongPress={onLongPress}
             style={styles.tabItem}
           >
-            <Text style={{ color: isFocused ? 'white' : 'black' }}>
-              {label}
-            </Text>
-          </PlatformPressable>
+            {
+                tabIcons[route.name] && tabIcons[route.name](isFocused)
+            }
+          </TouchableOpacity>
         );
       })}
     </View>
