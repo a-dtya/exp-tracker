@@ -4,6 +4,7 @@ import Button from '@/components/Button'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/config/firebase'
 import { verticalScale } from '@/utils/styling'
+import ScreenWrapper from '@/components/ScreenWrapper'
 
 const Home = () => {
   const handleLogOut = async() => {
@@ -11,12 +12,12 @@ const Home = () => {
   }
     
   return (
-    <View>
+    <ScreenWrapper>
       <Text>Home</Text>
       <Button onPress={handleLogOut}>
         <Text style={styles.text}>Logout</Text>
       </Button>
-    </View>
+    </ScreenWrapper>
   )
 }
 
@@ -28,5 +29,6 @@ const styles = StyleSheet.create({
     fontSize: verticalScale(16),
     fontWeight: 'bold',
     textAlign: 'center',
+    
   }
 })
